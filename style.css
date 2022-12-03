@@ -1,0 +1,20 @@
+.grid { /** 10 x 10 space grid */
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: grey;
+}
+
+.grid div { /* Only <div class="grid"> Each Grid Square = 40px x 40px */
+    height: 40px;
+    width: 40px;
+}
+
+.checked {
+    background-color: red;
+}
+
+.bomb {
+    background-color: orange;
+}
