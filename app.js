@@ -2,6 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const grid = document.querySelector(".grid")
+    const flagsLeft = document.querySelector("#flags-left")
+    const result = document.querySelector("#result")
     let flags = 0
     let width = 10
     let bombAmount = 20
@@ -10,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Render the gameboard:
     function createBoard() {
+        //flagsLeft.innerHTML = bombAmount
+
         //create shuffled game array with random bombs
         const bombArray = Array(bombAmount).fill("bomb") // Create Bombs
         const emptyArray = Array(width * width - bombAmount).fill("valid") // Create Empty spaces
@@ -28,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 click(square) // pass a square in every time mouse is clicked
             })
 
-            // Ctrl+click and Right CLick
+            // Ctrl and Right CLick
             square.oncontextmenu = function(e) {
                 e.preventDefault()
                 addFlag(square)
@@ -65,20 +69,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 square.classList.add("flag")
                 square.innerHTML = "🚩"
                 flags++
+                //flagsLeft.innerHTML = bombAmount - flags
                 checkForWin()
             } else {
                 square.classList.remove("flag")
                 square.innerHTML = ""
                 flags--
+                //flagsLeft.innerHTML = bombAmount - flags
             }
         }
     }
 
-    // Action for when unser clicks square:
+    // Action for when user clicks square:
     function click(square) {
         let currentId = square.id
         if (isGameOver) return
-        if(square.classList.contains("checked") || square.classList.contains("flag  ")) return
+        if (square.classList.contains("checked") || square.classList.contains("flag")) return
         if (square.classList.contains("bomb")) { // If you click a bomb
             //alert("GAME OVER!!") // Replace with Custom Modal
             gameOver(square)
@@ -86,6 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let total = square.getAttribute("data")
             if (total != 0) { // BUG?? (total > 0) ?
                 square.classList.add("checked") // Indicate that user clicked a square
+                if (total == 1) square.classList.add("ONE")
+                if (total == 2) square.classList.add("TWO")
+                if (total == 3) square.classList.add("THREE")
+                if (total == 4) square.classList.add("FOUR")
                 square.innerHTML = total
                 return
             }
@@ -96,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Check neighboring squares once square is clicked
-    // BUG?? Clicking square 98 doesnt activate 99 if there is no bomb around
+    // BUG?? Clicking square 98 or 89 doesnt activate 99 if there is no bomb around
     function checkSquare(square, currentId) {
         const isLeftEdge2 = (currentId % width === 0)
         const isRightEdge2 = (currentId % width === width - 1)
@@ -150,11 +160,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 const newSquare = document.getElementById(newId)
                 click(newSquare) // recursive call again
             }
-        }, 10) // 10 milliseconds delay
+        }, 100) // 10 milliseconds delay
     }
 
     // Game Over Script:
     function gameOver(square) {
+        //result.innerHTML = "BOOM! GAME OVER!!"
         console.log("BOOM!! GAME OVER!!")
         isGameOver = true
     
@@ -162,6 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
         squares.forEach(square => {
             if (square.classList.contains("bomb")) {
                 square.innerHTML = "💣" // Where to get the emoticons?
+                square.classList.remove("bomb")
+                square.classList.add("checked")
             }
         })
     }
@@ -175,11 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 matches++
             }
             if (matches === bombAmount) {
+                //result.innerHTML = "YOU WIN!!"
                 console.log("YOU WIN!!!")
                 isGameOver = true
             }
         }
     }
-
-
 })
