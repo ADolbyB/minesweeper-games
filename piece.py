@@ -25,3 +25,12 @@ class Piece():
 
     def getNumAround(self):
         return self.numAround
+
+    def toggleFlag(self):
+        self.flagged = not self.flagged
+
+    def click(self):
+        self.clicked = True
+
+    def getNeighbors(self):
+        return self.neighbors

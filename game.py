@@ -16,7 +16,11 @@ class Game():
             for event in pygame.event.get():
                 if (event.type == pygame.QUIT):
                     running = False
-                self.draw() # indent BUGFIX
+                if (event.type == pygame.MOUSEBUTTONDOWN):
+                    position = pygame.mouse.get_pos()
+                    rightClick = pygame.mouse.get_pressed()[2]
+                    self.handleClick(position, rightClick)
+            self.draw() # 2nd indent BUGFIX
             pygame.display.flip()
         pygame.quit()
 
@@ -43,7 +47,12 @@ class Game():
         # string = "unclicked-bomb" if piece.getHasBomb() else str(piece.getNumAround()) # debug
         string = None
         if (piece.getClicked()):
-            pass
+            string = "bomb-at-clicked-block" if piece.getHasBomb() else str(piece.getNumAround())
         else:
-            string = "empty-block"
+            string = "flag" if piece.getFlagged() else "empty-block"
         return self.images[string]
+
+    def handleClick(self, position, rightClick):
+        index = position[1] // self.pieceSize[1], position[0] // self.pieceSize[0]
+        piece = self.board.getPiece(index)
+        self.board.handleClick(piece, rightClick)

@@ -2,7 +2,7 @@ from game import Game
 from board import Board
 
 size = (9, 9) # Board Size
-prob = 0.5 # bomb probability per section
+prob = 0.05 # bomb probability per section
 board = Board(size, prob)
 screenSize = (600, 600)
 
