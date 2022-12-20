@@ -1,5 +1,6 @@
 import pygame
 import os
+from time import sleep
 
 class Game():
     def __init__(self, board, screenSize):
@@ -22,6 +23,11 @@ class Game():
                     self.handleClick(position, rightClick)
             self.draw() # 2nd indent BUGFIX
             pygame.display.flip()
+            if (self.board.getWon()):
+                sound = pygame.mixer.Sound("./sounds/win.wav")
+                sound.play()
+                sleep(3) # 3 second sleep after sound effect plays
+                running = False
         pygame.quit()
 
     def draw(self):
