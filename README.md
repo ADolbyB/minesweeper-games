@@ -1,8 +1,16 @@
 # Minesweeper Games
 
-Three Previous Repos For Minesweeper Games Combined into One.
+3 individual repos for MineSweeper games that are now combined into a single repo.
 
-2 Are Written in JavaScript, 1 Written in Python.
+2 games are written in JavaScript, 1 is Written in Python.
+
+## Notes:
+
+ - Commit histories have all been preserved.
+
+ - Sources used for each repo have been preserved in the original README.md files of that repo.
+
+ - Here is an online version of the classic Windows MineSweeper game: [Real or Clone?](https://minesweeper.online/)
 
 ## Status:
 
