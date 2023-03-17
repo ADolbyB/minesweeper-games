@@ -4,4 +4,4 @@ A [Tutorial](https://www.youtube.com/watch?v=W0No1JDc6vE) on building a JavaScri
 
 ## Status
 
-![GitHub repo size](https://img.shields.io/github/repo-size/ADolbyB/javascript-minesweeper?label=Repo%20Size&logo=github)
+This originally existed as the standalone repo `javascript-minesweeper`
