@@ -1,2 +1,4 @@
-# minesweeper-games
-A Collection of Minesweeper Repos Merged Into a Single Repo.
+# Minesweeper Games
+
+Three Previous Repos For Minesweeper Games Combined into One.
+2 Are Written in JavaScript, 1 Written in Python.
